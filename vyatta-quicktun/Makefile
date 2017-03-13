@@ -4,6 +4,8 @@ BUILDDIR_QT=/tmp/quicktun
 
 PREFIX=mipsel-linux-gnu-
 
+CC=$(PREFIX)cc
+
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
@@ -26,18 +28,18 @@ quicktunclone:
 	git clone https://github.com/neilalexander/quicktun $(BUILDDIR_QT)
 
 quicktunbuild:
-	mkdir $(BUILDDIR_QT)/obj $(BUILDDIR_QT)/tmp $(BUILDDIR_QT)/out $(BUILDDIR_QT)/tmp/include $(BUILDDIR_QT)/tmp/lib
+	cd $(BUILDDIR_QT) && mkdir obj out tmp tmp/include tmp/lib
 	echo '#include "$(BUILDDIR_QT)/src/tweetnacl.h"' > $(BUILDDIR_QT)/tmp/include/crypto_box_curve25519xsalsa20poly1305.h
 	echo '#include "$(BUILDDIR_QT)/src/tweetnacl.h"' > $(BUILDDIR_QT)/tmp/include/crypto_scalarmult_curve25519.h
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/tweetnacl.c     -o obj/tweetnacl.o     -I./tmp/include/
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/randombytes.c   -o obj/randombytes.o   -I./tmp/include/
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/proto.raw.c     -o obj/proto.raw.o     -I./tmp/include/
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/proto.nacl0.c   -o obj/proto.nacl0.o   -I./tmp/include/
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/proto.nacltai.c -o obj/proto.nacltai.o -I./tmp/include/
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/proto.salty.c   -o obj/proto.salty.o   -I./tmp/include/
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c -DCOMBINED_BINARY src/run.combined.c  -o obj/run.combined.o
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(CFLAGS) -c                   src/common.c        -o obj/common.o        -DQT_VERSION=\"`cat version`\"
-	cd $(BUILDDIR_QT) && $(PREFIX)cc $(LDFLAGS) -o out/quicktun obj/*.o
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/tweetnacl.c     -o obj/tweetnacl.o     -I./tmp/include/
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/randombytes.c   -o obj/randombytes.o   -I./tmp/include/
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/proto.raw.c     -o obj/proto.raw.o     -I./tmp/include/
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/proto.nacl0.c   -o obj/proto.nacl0.o   -I./tmp/include/
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/proto.nacltai.c -o obj/proto.nacltai.o -I./tmp/include/
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/proto.salty.c   -o obj/proto.salty.o   -I./tmp/include/
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/run.combined.c  -o obj/run.combined.o
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c                   src/common.c        -o obj/common.o        -DQT_VERSION=\"`cat version`\"
+	cd $(BUILDDIR_QT) && $(CC) $(LDFLAGS) -o out/quicktun obj/*.o
 
 quicktunstage:
 	cp $(BUILDDIR_QT)/out/quicktun opt/vyatta/sbin/quicktun
