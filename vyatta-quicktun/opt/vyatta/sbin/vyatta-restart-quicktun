@@ -20,11 +20,11 @@ then
 
     export INTERFACE=$1
     export PROTOCOL=`cli-shell-api returnValue interfaces quicktun $1 protocol`
-    export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local-address`
-    export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $1 local-port`
+    export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 remote-address`
+    export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $1 remote-port`
     export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $1 remote-float`
-    export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 remote-address`
-    export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 remote-port`
+    export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local-address`
+    export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 local-port`
     export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
     export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
     export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 pi-header`
