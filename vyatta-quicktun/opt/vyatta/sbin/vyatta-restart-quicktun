@@ -16,56 +16,24 @@ then
         else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
     fi
 
-    if [ `ls /config/quicktun.*.conf 2>/dev/null | wc -l` -gt 0 ];
-    then
-        echo -n "Starting quicktun interface $1... "
+    echo -n "Starting quicktun interface $1... "
 
-	export INTERFACE=$1
-        export PROTOCOL=`cli-shell-api returnValue interfaces quicktun $1 protocol`
-        export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local-address`
-        export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $1 local-port`
-        export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $1 remote-float`
-        export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 remote-address`
-        export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 remote-port`
-        export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
-        export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
-        export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 pi-header`
-        export TUN_MODE=1
+    export INTERFACE=$1
+    export PROTOCOL=`cli-shell-api returnValue interfaces quicktun $1 protocol`
+    export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local-address`
+    export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $1 local-port`
+    export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $1 remote-float`
+    export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 remote-address`
+    export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 remote-port`
+    export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
+    export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
+    export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 pi-header`
+    export TUN_MODE=1
 
-        nohup nice -5 /opt/vyatta/sbin/quicktun &>/tmp/quicktun.$1.log &
-        if [ $? -eq 0 ]; then echo $! > /var/run/quicktun.$1.pid; echo "OK.";
-        else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
-    fi
+    nohup nice -5 /opt/vyatta/sbin/quicktun &>/tmp/quicktun.$1.log &
+    if [ $? -eq 0 ]; then echo $! > /var/run/quicktun.$1.pid; echo "OK.";
+    else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
 else
-    if [ `pgrep quicktun 2>/dev/null | wc -l` -gt 0 ];
-    then
-        echo -n "Stopping running quicktun interfaces... "
-        cat /var/run/quicktun.*.pid 2>/dev/null | xargs kill -P 2&>1
-        if [ $? -eq 0 ]; then rm -f /var/run/quicktun.*.pid &>/dev/null; echo "OK.";
-        else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
-    fi
-
-    if [ `ls /config/quicktun.*.conf 2>/dev/null | wc -l` -gt 0 ];
-    then
-        ls /config/quicktun.*.conf | awk -v FS="(quicktun.|.conf)" '{print $2}' | while read file;
-        do
-            echo -n "Starting quicktun interface $file... "
-
-            export INTERFACE=$file
-            export PROTOCOL=`cli-shell-api returnValue interfaces quicktun $file protocol`
-            export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $file local-address`
-            export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $file local-port`
-            export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $file remote-float`
-            export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $file remote-address`
-            export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $file remote-port`
-            export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $file privatekey`
-            export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $file publickey`
-            export USE_PI=`cli-shell-api returnValue interfaces quicktun $file pi-header`
-            export TUN_MODE=1
-
-            nohup nice -5 /opt/vyatta/sbin/quicktun &>/tmp/quicktun.$file.log &
-            if [ $? -eq 0 ]; then echo $! > /var/run/quicktun.$file.pid; echo "OK.";
-            else rm -f /var/run/quicktun.$file.pid &>/dev/null; echo "failed."; fi
-        done
-    fi
+	echo "No interface specified"
+	exit -1
 fi
