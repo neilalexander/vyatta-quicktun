@@ -1,0 +1,5 @@
+type: bool
+help: Floating remote endpoint
+val_help: bool; Whether or not the remote endpoint is dynamic/floating
+
+priority: 999

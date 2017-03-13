@@ -1,0 +1,5 @@
+type: u32
+help: Remote port
+val_help: u32; UDP port number of remote side
+
+priority: 999

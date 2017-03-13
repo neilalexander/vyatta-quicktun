@@ -1,0 +1,5 @@
+type: ipv4
+help: Remote IP address
+val_help: ipv4; Remote IP address
+
+priority: 999

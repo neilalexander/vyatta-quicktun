@@ -1,0 +1,5 @@
+type: u32
+help: Local port
+val_help: u32; UDP port number of local side
+
+priority: 999

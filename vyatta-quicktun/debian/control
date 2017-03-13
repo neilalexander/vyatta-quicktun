@@ -1,0 +1,11 @@
+Package: vyatta-quicktun
+Version: 0.1-1
+Section: contrib/net
+Priority: extra
+Architecture: mipsel
+Maintainer: Neil Alexander <neilalexander@noreply.users.github.com>
+Depends: vyatta-cfg-system, vyatta-cfg, vyatta-op
+Replaces: vyatta-quicktun
+Description: Vyatta quicktun package
+ Binary quicktun package for MIPS-based Vyatta platforms
+ such as the Ubiquiti EdgeRouter X

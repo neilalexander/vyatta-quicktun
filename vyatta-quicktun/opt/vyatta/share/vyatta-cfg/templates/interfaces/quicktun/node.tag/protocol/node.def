@@ -1,0 +1,8 @@
+type: txt
+help: Protocol
+val_help: txt; Encryption protocol to use
+
+priority: 999
+
+allowed: echo "raw nacl0 nacltai salty"
+syntax:expression: $VAR(@) in "raw", "nacl0", "nacltai", "salty"; "Invalid protocol specified"
