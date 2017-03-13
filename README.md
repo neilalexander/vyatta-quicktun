@@ -22,7 +22,6 @@ apt-key add emdebian-toolchain-archive.key
 dpkg --add-architecture mipsel
 apt-get update
 apt-get install crossbuild-essential-mipsel
-apt-get install libsodium13:mipsel libsodium-dev:mipsel
 ```
 Compile the package then by cloning the repository and running 'make':
 ```
