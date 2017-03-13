@@ -31,17 +31,17 @@ cleanpackage:
 	rm ../data.tar.gz
 
 quicktunclone:
-	git clone https://github.com/UCIS/quicktun $(BUILDDIR_QT)
-	touch /tmp/quicktun/quicktun
+	git clone https://github.com/neilalexander/quicktun $(BUILDDIR_QT)
 
 quicktunbuild:
-	# TO DO
+	cd $(BUILDDIR_QT) && cc="mipsel-linux-gnu-cc" ARCH="mipsel" LDFLAGS="-L./tmp/lib" ./build.sh
 
 quicktunstage:
-	cp $(BUILDDIR_QT)/quicktun opt/vyatta/sbin/quicktun
+	cp $(BUILDDIR_QT)/out/quicktun opt/vyatta/sbin/quicktun
+	chmod +x opt/vyatta/sbin/quicktun
 
 clean:
-	rm -rf sbin/quicktun
+	rm -rf opt/vyatta/sbin/quicktun
 	rm -rf $(BUILDDIR_QT)
 
 distclean:	clean
