@@ -1,9 +1,10 @@
 #!/usr/bin/make -f
 
+PACKAGE=vyatta-quicktun
+
 BUILDDIR_QT=/tmp/quicktun
 
 PREFIX=mipsel-linux-gnu-
-
 CC=$(PREFIX)cc
 
 CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
