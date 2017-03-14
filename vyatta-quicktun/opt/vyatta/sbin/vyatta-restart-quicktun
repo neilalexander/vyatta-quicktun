@@ -11,7 +11,7 @@ then
     if [ `cat /var/run/quicktun.$1.pid 2>/dev/null | wc -l` -gt 0 ];
     then
         echo -n "Stopping quicktun interface $1... "
-        pkill -P `cat /var/run/quicktun.$1.pid 2>/dev/null`
+        sudo kill `cat /var/run/quicktun.$1.pid 2>/dev/null`
         if [ $? -eq 0 ]; then rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "OK.";
         else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
     fi
