@@ -16,25 +16,28 @@ then
         else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
     fi
 
-    echo -n "Starting quicktun interface $1... "
+    if cli-shell-api exists interfaces quicktun $1
+    then
+        echo -n "Starting quicktun interface $1... "
 
-    export INTERFACE=$1
-    export PROTOCOL=`cli-shell-api returnValue interfaces quicktun $1 protocol`
-    export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 remote address`
-    export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $1 remote port`
-    export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $1 remote float`
-    export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local address`
-    export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 local port`
-    export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
-    export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
-    export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 tunnel include-pi-header`
-    export TUN_UP_SCRIPT="/opt/vyatta/sbin/vyatta-up-quicktun $1"
-    export SETUID="nobody"
-    export TUN_MODE=1
+        export INTERFACE=$1
+        export PROTOCOL=`cli-shell-api returnValue interfaces quicktun $1 protocol`
+        export REMOTE_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 remote address`
+        export REMOTE_PORT=`cli-shell-api returnValue interfaces quicktun $1 remote port`
+        export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $1 remote float`
+        export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local address`
+        export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 local port`
+        export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
+        export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
+        export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 tunnel include-pi-header`
+        export TUN_UP_SCRIPT="/opt/vyatta/sbin/vyatta-up-quicktun $1"
+        export SETUID="nobody"
+        export TUN_MODE=1
 
-    nohup nice -5 /opt/vyatta/sbin/quicktun &>/tmp/quicktun.$1.log &
-    if [ $? -eq 0 ]; then echo $! > /var/run/quicktun.$1.pid; echo "OK.";
-    else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
+        nohup nice -5 /opt/vyatta/sbin/quicktun &>/tmp/quicktun.$1.log &
+        if [ $? -eq 0 ]; then echo $! > /var/run/quicktun.$1.pid; echo "OK.";
+        else rm -f /var/run/quicktun.$1.pid &>/dev/null; echo "failed."; fi
+    fi
 else
 	echo "No interface specified"
 	exit -1
