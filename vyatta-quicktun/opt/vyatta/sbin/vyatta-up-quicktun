@@ -1,5 +1,6 @@
 #!/bin/sh
 
 for addr in `cli-shell-api returnValues interfaces quicktun $1 tunnel address`; do
-	sudo /opt/vyatta/sbin/vyatta-address add $1 $addr
+	trimmed=`echo $addr | tr -d "'"`
+	sudo /opt/vyatta/sbin/vyatta-address add $1 $trimmed
 done
