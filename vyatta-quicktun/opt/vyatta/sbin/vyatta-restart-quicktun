@@ -28,6 +28,8 @@ then
     export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
     export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
     export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 tunnel include-pi-header`
+    export TUN_UP_SCRIPT="/opt/vyatta/sbin/vyatta-up-quicktun $1"
+    export SETUID="nobody"
     export TUN_MODE=1
 
     nohup nice -5 /opt/vyatta/sbin/quicktun &>/tmp/quicktun.$1.log &
