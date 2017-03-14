@@ -2,8 +2,15 @@
 
 cli-shell-api inSession
 if [ $? -ne 0 ]; then
-    echo "Unable to set up API session to read back config"
-    exit -1
+    session_env=$($SHELL_API getSessionEnv $PPID)
+    eval $session_env
+    cli-shell-api setupSession
+    cli-shell-api inSession
+
+    if [ $? -ne 0 ]; then
+        echo "Unable to set up API session to read back config"
+        exit -1
+    fi
 fi
 
 if [ -n $1 ];
