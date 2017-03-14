@@ -82,5 +82,5 @@ commit
 
 In operational view, you can restart the quicktun process associated with an interface:
 ```
-restart interfaces quicktun tun0
+restart quicktun tun0
 ```
