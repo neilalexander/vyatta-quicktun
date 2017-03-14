@@ -2,7 +2,7 @@
 
 cli-shell-api inSession
 if [ $? -ne 0 ]; then
-    session_env=$($SHELL_API getSessionEnv $PPID)
+    session_env=$(cli-shell-api getSessionEnv $PPID)
     eval $session_env
     cli-shell-api setupSession
     cli-shell-api inSession
