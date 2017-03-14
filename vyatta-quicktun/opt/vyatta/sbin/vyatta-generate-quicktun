@@ -1,0 +1,28 @@
+#!/bin/sh
+
+cli-shell-api inSession
+if [ $? -ne 0 ]; then
+	echo "Unable to set up API session to read back config"
+	exit -1
+fi
+
+if cli-shell-api exists interfaces quicktun $1 public-key
+then
+	exit
+fi
+
+if cli-shell-api exists interfaces quicktun $1 private-key
+then
+	exit
+fi
+
+PROTOCOL=`cli-shell-api returnValue interfaces quicktun $1 protocol`
+
+echo "Generating keypair and installing into public-key, private-key"
+
+PUBLICKEY=`/opt/vyatta/sbin/quicktun.keypair 2>1 | sed -n -e '/^PUBLIC:/p' | cut -d " " -f 2`
+PRIVATEKEY=`/opt/vyatta/sbin/quicktun.keypair 2>1 | sed -n -e '/^SECRET:/p' | cut -d " " -f 2`
+
+echo ${vyatta_sbindir}/my_set interfaces quicktun $1 public-key $PUBLICKEY
+echo ${vyatta_sbindir}/my_set interfaces quicktun $1 private-key $PRIVATEKEY
+

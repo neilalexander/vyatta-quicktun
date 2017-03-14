@@ -5,6 +5,8 @@ val_help: txt; Interface name (i.e. tun0)
 
 priority: 998
 
+create: sudo /opt/vyatta/sbin/vyatta-generate-quicktun $VAR(@)
+
 end: sudo /opt/vyatta/sbin/vyatta-restart-quicktun $VAR(@)
 
 syntax:expression: pattern $VAR(@) "^tun[0-9]+$" \
