@@ -1,0 +1,5 @@
+type: txt
+help: Public key
+val_help: txt; Public key
+
+priority: 999
