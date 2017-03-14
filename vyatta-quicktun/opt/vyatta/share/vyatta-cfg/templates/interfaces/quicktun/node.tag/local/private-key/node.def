@@ -1,5 +1,5 @@
 type: txt
-help: Private key
-val_help: txt; Private key
+help: Private key (this is secret, do not send it to anyone)
+val_help: txt; Private key (this is secret, do not send it to anyone)
 
 priority: 999

@@ -34,7 +34,7 @@ sudo dpkg -i vyatta-quicktun.deb
 
 ### Creating an interface
 
-Create the interface by specifying protocol (either `raw`, `nacl0`, `nacltai` or `salty`), remote and local endpoints:
+Create the interface by specifying protocol (either `raw`, `nacl0`, `nacltai` or `salty`), remote and local endpoints and your peer's public key:
 ```
 configure
 set interfaces quicktun tun0 description "QuickTun Tunnel"
@@ -43,14 +43,16 @@ set interfaces quicktun tun0 local address 1.1.1.1
 set interfaces quicktun tun0 local port 1111
 set interfaces quicktun tun0 remote address 2.2.2.2
 set interfaces quicktun tun0 remote port 2222
+set interfaces quicktun tun0 remote public-key XXXXXXXXXX
 commit
 ```
-A keypair will automatically be generated if not specified:
+Your own keypair will automatically be generated if not specified. You can retrieve your keypair:
 ```
 configure
 show interfaces quicktun tun0 local private-key
 show interfaces quicktun tun0 local public-key
 ```
+Your private key is secret. Do not share it. Send your public key to your peer.
 
 ### Set tunnel interface addresses
 

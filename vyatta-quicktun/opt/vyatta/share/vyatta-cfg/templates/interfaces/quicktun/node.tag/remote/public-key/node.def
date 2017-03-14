@@ -1,5 +1,5 @@
 type: txt
-help: Public key
-val_help: txt; Public key
+help: Public key (your peer's public key)
+val_help: txt; Public key (your peer's public key)
 
 priority: 999

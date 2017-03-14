@@ -1,0 +1,5 @@
+type: txt
+help: Public key (this is your public key for info only, give it to your peer)
+val_help: txt; Public key (this is your public key for info only, give it to your peer)
+
+priority: 999
