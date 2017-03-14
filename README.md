@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This is a QuickTun distributable package for Ubiquiti EdgeOS, providing support for QuickTun TUN interfaces through the EdgeOS CLI. 
+This is a QuickTun distributable package for Ubiquiti EdgeOS, providing support for QuickTun TUN interfaces through the EdgeOS CLI.
 
 ### Compatibility
 
@@ -76,4 +76,11 @@ set interfaces quicktun tun0 firewall in ipv6-name CHAIN-IPv6-IN
 set interfaces quicktun tun0 firewall local ipv6-name CHAIN-IPv6-LOCAL
 set interfaces quicktun tun0 firewall out ipv6-name CHAIN-IPv6-OUT
 commit
+```
+
+### Restart quicktun
+
+In operational view, you can restart the quicktun process associated with an interface:
+```
+restart interfaces quicktun tun0
 ```
