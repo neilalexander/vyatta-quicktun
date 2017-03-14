@@ -27,8 +27,8 @@ then
         export REMOTE_FLOAT=`cli-shell-api returnValue interfaces quicktun $1 remote float`
         export LOCAL_ADDRESS=`cli-shell-api returnValue interfaces quicktun $1 local address`
         export LOCAL_PORT=`cli-shell-api returnValue interfaces quicktun $1 local port`
-        export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 private-key`
-        export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 public-key`
+        export PRIVATE_KEY=`cli-shell-api returnValue interfaces quicktun $1 local private-key`
+        export PUBLIC_KEY=`cli-shell-api returnValue interfaces quicktun $1 remote public-key`
         export USE_PI=`cli-shell-api returnValue interfaces quicktun $1 tunnel include-pi-header`
         export TUN_UP_SCRIPT="/opt/vyatta/sbin/vyatta-up-quicktun $1"
         export SETUID="nobody"

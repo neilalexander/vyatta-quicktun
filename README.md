@@ -48,8 +48,8 @@ commit
 A keypair will automatically be generated if not specified:
 ```
 configure
-show interfaces quicktun tun0 private-key
-show interfaces quicktun tun0 public-key
+show interfaces quicktun tun0 local private-key
+show interfaces quicktun tun0 local public-key
 ```
 
 ### Set tunnel interface addresses

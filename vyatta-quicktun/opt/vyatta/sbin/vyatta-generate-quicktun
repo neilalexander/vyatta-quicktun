@@ -6,12 +6,12 @@ if [ $? -ne 0 ]; then
 	exit -1
 fi
 
-if cli-shell-api exists interfaces quicktun $1 public-key
+if cli-shell-api exists interfaces quicktun $1 local public-key
 then
 	exit
 fi
 
-if cli-shell-api exists interfaces quicktun $1 private-key
+if cli-shell-api exists interfaces quicktun $1 local private-key
 then
 	exit
 fi
@@ -23,6 +23,6 @@ echo "Generating keypair and installing into public-key, private-key"
 PUBLICKEY=`/opt/vyatta/sbin/quicktun.keypair 2>1 | sed -n -e '/^PUBLIC:/p' | cut -d " " -f 2`
 PRIVATEKEY=`/opt/vyatta/sbin/quicktun.keypair 2>1 | sed -n -e '/^SECRET:/p' | cut -d " " -f 2`
 
-/opt/vyatta/sbin/my_set interfaces quicktun $1 public-key $PUBLICKEY
-/opt/vyatta/sbin/my_set interfaces quicktun $1 private-key $PRIVATEKEY
+/opt/vyatta/sbin/my_set interfaces quicktun $1 local public-key $PUBLICKEY
+/opt/vyatta/sbin/my_set interfaces quicktun $1 local private-key $PRIVATEKEY
 
