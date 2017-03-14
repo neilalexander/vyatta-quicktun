@@ -1,0 +1,9 @@
+image: gcc
+build:
+  stage: build
+  script: 
+    - cd vyatta-quicktun
+    - make
+  artifacts:
+    paths:
+      - vyatta-quicktun.deb
