@@ -41,13 +41,19 @@ quicktunbuild:
 	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c -DCOMBINED_BINARY src/run.combined.c  -o obj/run.combined.o
 	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c                   src/common.c        -o obj/common.o        -DQT_VERSION=\"`cat version`\"
 	cd $(BUILDDIR_QT) && $(CC) $(LDFLAGS) -o out/quicktun obj/*.o
+	cd $(BUILDDIR_QT) && $(CC) $(CFLAGS) -c                   src/keypair.c       -o obj/keypair.o       -I./tmp/include/ \
+	                                                                                                     -DQT_VERSION=\"`cat version`\"
+	cd $(BUILDDIR_QT) && $(CC) $(LDFLAGS) -o out/quicktun.keypair obj/keypair.o obj/tweetnacl.o obj/randombytes.o
 
 quicktunstage:
 	cp $(BUILDDIR_QT)/out/quicktun opt/vyatta/sbin/quicktun
+	cp $(BUILDDIR_QT)/out/quicktun.keypair opt/vyatta/sbin/quicktun.keypair
 	chmod +x opt/vyatta/sbin/quicktun
+	chmod +x opt/vyatta/sbin/quicktun.keypair
 
 clean:
 	rm -rf opt/vyatta/sbin/quicktun
+	rm -rf opt/vyatta/sbin/quicktun.keypair
 	rm -rf $(BUILDDIR_QT)
 
 distclean:	clean

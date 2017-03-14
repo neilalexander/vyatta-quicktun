@@ -1,3 +1,4 @@
 .DS_Store
 vyatta-quicktun.deb
 vyatta-quicktun/opt/vyatta/sbin/quicktun
+vyatta-quicktun/opt/vyatta/sbin/quicktun.keypair
