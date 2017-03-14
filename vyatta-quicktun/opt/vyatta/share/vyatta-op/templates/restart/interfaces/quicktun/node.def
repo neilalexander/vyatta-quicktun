@@ -1,2 +1,0 @@
-help: Restart the specified quicktun interface
-allowed: ls /var/run/quicktun.*.pid | cut -d. -f2 | sed '/^$/d'

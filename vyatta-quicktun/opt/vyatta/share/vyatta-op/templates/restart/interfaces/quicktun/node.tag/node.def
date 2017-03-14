@@ -1,2 +1,0 @@
-run: sudo /opt/vyatta/sbin/vyatta-restart-quicktun $4
-help: Restart the specified quicktun interface
