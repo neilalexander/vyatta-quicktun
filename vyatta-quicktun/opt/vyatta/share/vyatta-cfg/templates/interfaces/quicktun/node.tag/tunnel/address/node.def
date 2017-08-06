@@ -4,6 +4,8 @@ val_help: ipv4net; IPv4 address and prefix length
 val_help: ipv6net; IPv6 address and prefix length
 help: IP address
 
+priority: 999
+
 syntax:expression: exec "/opt/vyatta/sbin/valid_address $VAR(@)"
 
 create: sudo /opt/vyatta/sbin/vyatta-address add $VAR(../../@) $VAR(@)
