@@ -25,7 +25,7 @@ apt-get install crossbuild-essential-mipsel
 ```
 Compile the package then by cloning the repository and running 'make':
 ```
-make
+PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' make -e
 ```
 The package `vyatta-quicktun.deb` will be created in the parent directory. Copy it to the EdgeRouter and install it:
 ```
