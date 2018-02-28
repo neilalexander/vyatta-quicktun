@@ -44,5 +44,5 @@ PATH=/opt/mips-mti-linux-gnu/2015.06-05/bin:$PATH
 echo "Building vyatta-quicktun..."
 BRANCH=$1; [ -z "${BRANCH}" ] && BRANCH=master
 cd vyatta-quicktun && \
-    PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' BRANCH=${BRANCH} make cross -e && \
+    PREFIX='mips-mti-linux-gnu-' PKGARCH='mips' BRANCH=${BRANCH} make -e && \
     cd ..

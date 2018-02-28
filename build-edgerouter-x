@@ -57,5 +57,5 @@ fi
 echo "Building vyatta-quicktun..."
 BRANCH=$1; [ -z "${BRANCH}" ] && BRANCH=master
 cd vyatta-quicktun && \
-    PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' CROSS_CFLAGS="-mips32r2 -march=1004kc -mhard-float" BRANCH=${BRANCH} make cross -e && \
+    PREFIX='mipsel-linux-gnu-' PKGARCH='mipsel' CROSS_CFLAGS="-mips32r2 -march=1004kc -mhard-float" BRANCH=${BRANCH} make -e && \
     cd ..
