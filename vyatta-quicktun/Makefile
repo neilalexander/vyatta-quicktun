@@ -5,7 +5,7 @@ PACKAGE=vyatta-quicktun
 BUILDDIR_QT=/tmp/quicktun
 
 PREFIX?='mipsel-linux-gnu-'
-CC=$(PREFIX)cc
+CC=$(PREFIX)gcc
 PKGARCH?=$(shell dpkg --print-architecture)
 VERSION=$(shell printf "0.1.%s" `git rev-list --count HEAD 2>/dev/null || echo 0`)
 
